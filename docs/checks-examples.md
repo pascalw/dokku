@@ -18,6 +18,8 @@ If your application needs a longer period to boot up - perhaps to load data into
 
 To specify checks, add a `CHECKS` file to the root of your project directory. This is a text file with one line per check. Empty lines and lines starting with `#` are ignored.
 
+> For dockerfile-based deploys, the file *must* be in `/app/CHECKS` within the container. `/app` is used by default as the root container directory for buildpack-based deploys.
+
 A check is a relative URL and may be followed by expected content from the page, for example:
 
 ```
