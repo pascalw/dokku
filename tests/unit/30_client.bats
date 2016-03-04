@@ -34,7 +34,7 @@ teardown() {
   echo "status: "$status
   assert_success
   git remote | grep dokku
-  run bash -c "${BATS_TEST_DIRNAME}/../../contrib/dokku_client.sh --force apps:destroy"
+  run bash -c "${BATS_TEST_DIRNAME}/../../contrib/dokku_client.sh apps:destroy --force"
   echo "output: "$output
   echo "status: "$status
   assert_success
@@ -49,14 +49,14 @@ teardown() {
   assert_success
   git remote | grep dokku
   git remote -v | grep $test_app_name
-  run bash -c "${BATS_TEST_DIRNAME}/../../contrib/dokku_client.sh --force apps:destroy"
+  run bash -c "${BATS_TEST_DIRNAME}/../../contrib/dokku_client.sh apps:destroy --force"
   echo "output: "$output
   echo "status: "$status
   assert_success
 }
 
 @test "(client) config:set" {
-  run ./contrib/dokku_client.sh config:set $TEST_APP test_var=true test_var2=\"hello world\"
+  run ./contrib/dokku_client.sh config:set --no-restart $TEST_APP test_var=true test_var2=\"hello world\"
   echo "output: "$output
   echo "status: "$status
   assert_success
@@ -67,7 +67,7 @@ teardown() {
 }
 
 @test "(client) config:unset" {
-  run ./contrib/dokku_client.sh config:set $TEST_APP test_var=true test_var2=\"hello world\"
+  run ./contrib/dokku_client.sh config:set --no-restart $TEST_APP test_var=true test_var2=\"hello world\"
   echo "output: "$output
   echo "status: "$status
   assert_success
